@@ -4,14 +4,17 @@ echo PHP_EOL;
 
 $name = readline("Ваше имя? ");
 
-$task1 = readline("Какая задача стоит перед вами сегодня? ");
-$task1Time = readline("Сколько примерно времени эта задача займет в часах? ");
+$taskNameQuestion = "задача стоит перед вами сегодня";
+$taskTimeQuestion = "Сколько примерно времени эта задача займет в часах?";
 
-$task2 = readline("Какая еще задача стоит перед вами сегодня? ");
-$task2Time = readline("Сколько примерно времени эта задача займет в часах? ");
+$task1 = readline("Какая {$taskNameQuestion}? ");
+$task1Time = readline("{$taskTimeQuestion} ");
 
-$task3 = readline("Третья задача стоит перед вами сегодня? ");
-$task3Time = readline("Сколько примерно времени эта задача займет в часах? ");
+$task2 = readline("Какая еще {$taskNameQuestion}? ");
+$task2Time = readline("{$taskTimeQuestion} ");
+
+$task3 = readline("Третья {$taskNameQuestion}? ");
+$task3Time = readline("{$taskTimeQuestion} ");
 
 $totalTime = (int)$task1Time + (int)$task2Time + (int)$task3Time;
 
