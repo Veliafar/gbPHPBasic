@@ -17,8 +17,10 @@ while (!$isAnswerCorrect) {
     if ($answer === $correctAnswerIs) {
         echo PHP_EOL . "Ответ верный! Поздравляю!" . PHP_EOL;
         $isAnswerCorrect = true;
-    } else {
+    } else if ($answer === 1 || $answer === 3 || $answer === 4) {
         echo PHP_EOL . "Ответ неверный!" . PHP_EOL;
+    } else {
+        echo PHP_EOL . "Введите корректный ответ!" . PHP_EOL;
     }
 }
 
