@@ -1,5 +1,7 @@
 <?php
 
+require "taskClass.php";
+
 echo PHP_EOL;
 
 $name = readline("Ваше имя? ");
@@ -12,17 +14,6 @@ $totalTaskTime = 0;
 
 $taskCount = (int)readline("Сколько задач у Вас на сегодня? ");
 
-class Task
-{
-    public string $taskName = "";
-    public int $taskTime = 0;
-
-    public function __construct(string $taskName, int $taskTime)
-    {
-        $this->taskName = $taskName;
-        $this->taskTime = $taskTime;
-    }
-}
 
 for ($i = 0; $i < $taskCount; $i++ ) {
 
