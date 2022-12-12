@@ -38,16 +38,16 @@ for ($i = 0; $i < $taskCount; $i++ ) {
 
 if ($taskCount < 1) {
     echo PHP_EOL . "У Вас нет задач на сегодня!" . PHP_EOL;
-} else {
-
-    echo PHP_EOL . "{$name}, количество запланированных задач - {$taskCount}. вот они: " . PHP_EOL;
-
-    foreach ($tasks as &$value) {
-        echo "- {$value->taskName} ({$value->taskTime}ч)" . PHP_EOL;
-        $totalTaskTime += $value->taskTime;
-    }
-
-    echo "Примерное время выолнения плана: {$totalTaskTime}ч" . PHP_EOL;
+    return;
 }
+
+echo PHP_EOL . "{$name}, количество запланированных задач - {$taskCount}. вот они: " . PHP_EOL;
+
+foreach ($tasks as &$value) {
+    echo "- {$value->taskName} ({$value->taskTime}ч)" . PHP_EOL;
+    $totalTaskTime += $value->taskTime;
+}
+
+echo "Примерное время выолнения плана: {$totalTaskTime}ч" . PHP_EOL;
 
 
