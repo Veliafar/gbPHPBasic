@@ -14,13 +14,18 @@ while (!$isAnswerCorrect) {
 
     $answer = (int)readline("Выберите нужную цифру: ");
 
-    if ($answer === $correctAnswerIs) {
-        echo PHP_EOL . "Ответ верный! Поздравляю!" . PHP_EOL;
-        $isAnswerCorrect = true;
-    } else if ($answer === 1 || $answer === 3 || $answer === 4) {
-        echo PHP_EOL . "Ответ неверный!" . PHP_EOL;
-    } else {
-        echo PHP_EOL . "Введите корректный ответ!" . PHP_EOL;
+    switch (true) {
+        case $answer === $correctAnswerIs:
+            echo PHP_EOL . "Ответ верный! Поздравляю!" . PHP_EOL;
+            $isAnswerCorrect = true;
+            break;
+        case $answer == 1:
+        case $answer == 3:
+        case $answer == 4:
+            echo PHP_EOL . "Ответ неверный!" . PHP_EOL;
+            break;
+        default:
+            echo PHP_EOL . "Введите корректный ответ!" . PHP_EOL;
     }
     echo "-----------------------------------" . PHP_EOL;
 }
