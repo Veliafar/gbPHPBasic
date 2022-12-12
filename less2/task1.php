@@ -22,6 +22,7 @@ while (!$isAnswerCorrect) {
     } else {
         echo PHP_EOL . "Введите корректный ответ!" . PHP_EOL;
     }
+    echo "-----------------------------------" . PHP_EOL;
 }
 
 
