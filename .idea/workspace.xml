@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="908dd375-55eb-4055-9677-69ba2a52ae13" name="Changes" comment="lesson1">
-      <change afterPath="$PROJECT_DIR$/less2/task1.php" afterDir="false" />
+    <list default="true" id="908dd375-55eb-4055-9677-69ba2a52ae13" name="Changes" comment="lesson2 task1">
+      <change afterPath="$PROJECT_DIR$/less2/task2.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +66,7 @@
       <workItem from="1670399688479" duration="2139000" />
       <workItem from="1670409059955" duration="786000" />
       <workItem from="1670483750978" duration="1794000" />
-      <workItem from="1670825177185" duration="1114000" />
+      <workItem from="1670825177185" duration="3429000" />
     </task>
     <task id="LOCAL-00001" summary="lesson1">
       <created>1670399913365</created>
@@ -116,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670825311289</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="lesson2 task1">
+      <created>1670828313430</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1670828313430</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +132,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="lesson1" />
-    <option name="LAST_COMMIT_MESSAGE" value="lesson1" />
+    <MESSAGE value="lesson2 task1" />
+    <option name="LAST_COMMIT_MESSAGE" value="lesson2 task1" />
   </component>
 </project>
