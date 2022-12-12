@@ -12,7 +12,7 @@ while (!$isAnswerCorrect) {
     echo "3) 1896 - 1905" . PHP_EOL;
     echo "4) 1896 - 1918" . PHP_EOL;
 
-    $answer = (int)readline("Выберите нужную цифру? ");
+    $answer = (int)readline("Выберите нужную цифру: ");
 
     if ($answer === $correctAnswerIs) {
         echo PHP_EOL . "Ответ верный! Поздравляю!" . PHP_EOL;
