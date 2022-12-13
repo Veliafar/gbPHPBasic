@@ -1,12 +1,12 @@
 <?php
 class Task
 {
-    public string $taskName = "";
-    public int $taskTime = 0;
+    public string $name = "";
+    public int $time = 0;
 
-    public function __construct(string $taskName, int $taskTime)
+    public function __construct(string $name, int $time)
     {
-        $this->taskName = $taskName;
-        $this->taskTime = $taskTime;
+        $this->name = $name;
+        $this->time = $time;
     }
 }

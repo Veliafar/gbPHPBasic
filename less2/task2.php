@@ -35,8 +35,8 @@ if ($taskCount < 1) {
 echo PHP_EOL . "{$name}, количество запланированных задач - {$taskCount}. вот они: " . PHP_EOL;
 
 foreach ($tasks as &$value) {
-    echo "- {$value->taskName} ({$value->taskTime}ч)" . PHP_EOL;
-    $totalTaskTime += $value->taskTime;
+    echo "- {$value->name} ({$value->time}ч)" . PHP_EOL;
+    $totalTaskTime += $value->time;
 }
 
 echo "Примерное время выолнения плана: {$totalTaskTime}ч" . PHP_EOL;
