@@ -15,7 +15,7 @@ $groups = [
     'БАП20',
 ];
 
-$familyArr = [
+$familyList = [
     'Сидоров',
     'Винницкий',
     'Федоров',
@@ -23,7 +23,7 @@ $familyArr = [
     'Казаченко',
     'Прокапенко',
 ];
-$nameArr = [
+$nameList = [
     'Денис',
     'Игорь',
     'Алексей',
@@ -32,53 +32,54 @@ $nameArr = [
     'Евгений',
 ];
 
-$familyArrRandomKeys = array_rand($familyArr, 6);
-$nameArrRandomKeys = array_rand($nameArr, 6);
-$groupsRandomKeys = array_merge([], array_rand($groups, 2), array_rand($groups, 2), array_rand($groups, 2));
+$familyListRandomKeys = array_rand($familyList, 6);
+$nameListRandomKeys = array_rand($nameList, 6);
+$groupsRandomKeys = array_merge([],
+    [
+        ...array_rand($groups, 2),
+        ...array_rand($groups, 2),
+        ...array_rand($groups, 2)
+    ]
+);
 
-foreach ($familyArrRandomKeys as $i => $value) {
-    $name = "{$familyArr[$i]} {$nameArr[$i]}";
+foreach ($familyListRandomKeys as $i => $value) {
+    $name = "{$familyList[$i]} {$nameList[$i]}";
     $students[$groups[$groupsRandomKeys[$i]]][$name] = random_int(1, 5);
 }
 echo PHP_EOL . "Группы сутдентов: " . PHP_EOL;
 print_r($students);
 
-$groupAverageScore1 = 0;
-$groupAverageScore2 = 0;
+$groupAverageScore = [];
+$exclusionList = [];
 
-$exclusionList = [
-    $groups[0] => [],
-    $groups[1] => [],
-];
+foreach ($groups as $groupName) {
+    $groupAverageScore[$groupName] = 0;
+    $exclusionList[$groupName] = [];
+}
 
-foreach ($students as $key => $group) {
-    if ($key === $groups[0]) {
-        foreach ($group as $name => $studentScore) {
-            $groupAverageScore1 += $studentScore;
-            if ($studentScore < 3) {
-                $exclusionList[$groups[0]][$name] = $studentScore;
-            }
-        }
-    }
-
-    if ($key === $groups[1]) {
-        foreach ($group as $name => $studentScore) {
-            $groupAverageScore2 += $studentScore;
-            if ($studentScore < 3) {
-                $exclusionList[$groups[1]][$name] = $studentScore;
-            }
+foreach ($students as $groupName => $groupStudents) {
+    foreach ($groupStudents as $name => $score) {
+        $groupAverageScore[$groupName] += $score;
+        if ($score < 3) {
+            $exclusionList[$groupName][$name] = $score;
         }
     }
 }
 
-$groupAverageScore1 = $groupAverageScore1 / count($students[$groups[0]]);
-$groupAverageScore2 = $groupAverageScore2 / count($students[$groups[1]]);
 
-if ($groupAverageScore1 > $groupAverageScore2) {
-    echo PHP_EOL . "Успеваемость группы {$groups[0]} выше - в среднем это {$groupAverageScore1}";
-} else {
-    echo PHP_EOL . "Успеваемость группы {$groups[1]} выше - в среднем это {$groupAverageScore2}";
+$bestGroupName = '';
+$bestGroupAverageScore = 0;
+
+foreach ($groupAverageScore as $key => &$value) {
+    $value = $value / count($students[$key]);
+
+    if ($bestGroupAverageScore < $value) {
+        $bestGroupAverageScore = $value;
+        $bestGroupName = $key;
+    }
 }
+
+echo PHP_EOL . "Успеваемость группы {$bestGroupName} выше - в среднем это {$bestGroupAverageScore} балла";
 
 echo PHP_EOL . PHP_EOL . "Список на отчисление: " . PHP_EOL;
 print_r($exclusionList);
