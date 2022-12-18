@@ -70,7 +70,7 @@ foreach ($groupAverageScore as $key => &$value) {
     }
 }
 
-echo PHP_EOL . "Успеваемость группы {$bestGroupName} выше - в среднем это {$bestGroupAverageScore} балла";
+echo PHP_EOL . "Успеваемость группы {$bestGroupName} выше - в среднем это {$bestGroupAverageScore} баллов";
 
 echo PHP_EOL . PHP_EOL . "Список на отчисление: " . PHP_EOL;
 print_r($exclusionList);
