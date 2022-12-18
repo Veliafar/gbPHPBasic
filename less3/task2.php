@@ -44,6 +44,9 @@ foreach ($generatedWishes as $i => &$value) {
 
 print_r($generatedWishes);
 
+$wishString = implode(', ', $generatedWishes);
 
-echo PHP_EOL . "Дорогой {$name}, от всего сердца поздравляю тебя с днем рождения, желаю {$generatedWishes[0]}, {$generatedWishes[1]} и {$generatedWishes[2]}!" . PHP_EOL;
+var_dump($wishString);
+
+echo PHP_EOL . "Дорогой {$name}, от всего сердца поздравляю тебя с днем рождения, желаю {$wishString}!" . PHP_EOL;
 
