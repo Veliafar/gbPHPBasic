@@ -10,10 +10,11 @@ $students = [
     ]
 ];
 
-$groups = [
-    'ИТ20',
-    'БАП20',
-];
+$groups = [];
+
+foreach ($students as $key => $value) {
+    $groups[] = $key;
+}
 
 $familyList = [
     'Сидоров',
