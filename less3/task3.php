@@ -33,19 +33,9 @@ $nameList = [
     'Евгений',
 ];
 
-$familyListRandomKeys = array_rand($familyList, 6);
-$nameListRandomKeys = array_rand($nameList, 6);
-$groupsRandomKeys = array_merge([],
-    [
-        ...array_rand($groups, 2),
-        ...array_rand($groups, 2),
-        ...array_rand($groups, 2)
-    ]
-);
-
-foreach ($familyListRandomKeys as $i => $value) {
-    $name = "{$familyList[$i]} {$nameList[$i]}";
-    $students[$groups[$groupsRandomKeys[$i]]][$name] = random_int(1, 5);
+foreach ($familyList as $value) {
+    $name = "{$nameList[array_rand($nameList, 1)]} {$familyList[array_rand($familyList, 1)]}";
+    $students[$groups[array_rand($groups, 1)]][$name] = random_int(1, 5);
 }
 echo PHP_EOL . "Группы сутдентов: " . PHP_EOL;
 print_r($students);
