@@ -42,11 +42,7 @@ foreach ($generatedWishes as $i => &$value) {
     $value = $epithets[$epithetsRandomKeys[$i]] . " " . $wishes[$wishesRandomKeys[$i]];
 }
 
-print_r($generatedWishes);
-
 $wishString = implode(', ', $generatedWishes);
-
-var_dump($wishString);
 
 echo PHP_EOL . "Дорогой {$name}, от всего сердца поздравляю тебя с днем рождения, желаю {$wishString}!" . PHP_EOL;
 
