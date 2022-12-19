@@ -33,10 +33,12 @@ echo PHP_EOL;
 
 $name = readline("Имя именинника? ") ?: "Человек";
 
-$epithetsRandomKeys = array_rand($epithets, 3);
-$wishesRandomKeys = array_rand($wishes, 3);
+$numberOfWishes = 3;
 
-$generatedWishes = range(0, 2);
+$epithetsRandomKeys = array_rand($epithets, $numberOfWishes);
+$wishesRandomKeys = array_rand($wishes, $numberOfWishes);
+
+$generatedWishes = range(0, $numberOfWishes - 1);
 
 foreach ($generatedWishes as $i => &$value) {
     $value = $epithets[$epithetsRandomKeys[$i]] . " " . $wishes[$wishesRandomKeys[$i]];
