@@ -34,8 +34,8 @@ $nameList = [
 ];
 
 foreach ($familyList as $value) {
-    $name = "{$nameList[array_rand($nameList, 1)]} {$familyList[array_rand($familyList, 1)]}";
-    $students[$groups[array_rand($groups, 1)]][$name] = random_int(1, 5);
+    $name = "{$nameList[array_rand($nameList)]} {$familyList[array_rand($familyList)]}";
+    $students[$groups[array_rand($groups)]][$name] = random_int(1, 5);
 }
 echo PHP_EOL . "Группы сутдентов: " . PHP_EOL;
 print_r($students);
