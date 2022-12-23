@@ -41,21 +41,17 @@ $box = [
 
 function findItemInBox(string $itemName, array $box): bool
 {
-    $isFound = false;
     foreach ($box as $boxItem) {
-
-        if ($boxItem == $itemName) {
-            $isFound = true;
-            break;
-        }
-
-        if (is_array($boxItem)) {
-            $isFound = findItemInBox($itemName, $boxItem);
-            if ($isFound) break;
+        if (
+            $boxItem == $itemName || (
+                is_array($boxItem) && findItemInBox($itemName, $boxItem)
+            )
+        ) {
+            return true;
         }
     }
 
-    return $isFound;
+    return false;
 }
 
 var_dump(findItemInBox("Ключ", $box));
