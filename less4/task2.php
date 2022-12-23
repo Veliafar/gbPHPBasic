@@ -9,13 +9,12 @@ print_r($arr);
 
 function findMinMaxAndAverageFromArr(array $intArray): array
 {
-    $resultArray = [];
 
-    $resultArray['min'] = min($intArray);
-    $resultArray['max'] = max($intArray);
-    $resultArray['average'] = array_sum($intArray) / count($intArray);
-
-    return $resultArray;
+    return [
+        'min' => min($intArray),
+        'max' => max($intArray),
+        'average' => array_sum($intArray) / count($intArray),
+    ];
 }
 
 echo PHP_EOL . "Результат работы findMinMaxAndAverageFromArr" . PHP_EOL;
