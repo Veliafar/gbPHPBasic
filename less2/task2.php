@@ -19,7 +19,7 @@ for ($i = 0; $i < $taskCount; $i++ ) {
 
     $taskNum = $i + 1;
 
-    $task = new Task(
+    $task = new TaskLesson2(
         readline("{$taskNum}) {$taskNameQuestion}? "),
         (int)readline("{$taskTimeQuestion} ")
     );
