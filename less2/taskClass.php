@@ -1,5 +1,5 @@
 <?php
-class Task
+class TaskLesson2
 {
     public string $name = "";
     public int $time = 0;
