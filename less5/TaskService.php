@@ -1,4 +1,6 @@
 <?php
+
+include_once 'Task.php';
 class TaskService
 {
     static function addComment(User $user, Task $task, string $text): void {
@@ -8,7 +10,7 @@ class TaskService
     }
 
     static function addTask(User $user, string $description, ?int $priority): void {
-        $task = new Task($user, $description, $priority);
+        $task = new TaskLesson5($user, $description, $priority);
         $user->addTask($task);
     }
 }

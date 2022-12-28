@@ -1,4 +1,6 @@
 <?php
+
+include_once 'Task.php';
 class User
 {
     private int $ID;
@@ -27,7 +29,7 @@ class User
         $this->comments[] = $comment;
     }
 
-    function addTask(Task $task): void {
+    function addTask(TaskLesson5 $task): void {
         $this->tasks[] = $task;
     }
 }
