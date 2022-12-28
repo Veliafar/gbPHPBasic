@@ -1,5 +1,5 @@
 <?php
-class Task
+class TaskLesson5
 {
     private int $ID;
     private string $description;
