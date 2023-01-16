@@ -3,21 +3,11 @@ require_once "Task.php";
 
 class TaskProvider
 {
-  private array $tasks = [];
+  private array $tasks;
 
-  public function addTask($description): void
+  public function __construct()
   {
-    $task = new Task($description);
-    $this->tasks[] = $task;
-    $_SESSION['tasks'] = $this->tasks;
-    strtok($_SERVER["REQUEST_URI"], '?');
-    header("Location: /?controller=tasks");
-    die();
-  }
-
-  public function setTasks(array $tasks): void
-  {
-    $this->tasks = $tasks;
+    $this->tasks = $_SESSION['tasks'] ?? [];
   }
 
   public function getTasks(): array
@@ -25,31 +15,28 @@ class TaskProvider
     return $this->tasks;
   }
 
+  public function addTask($task): void
+  {
+    $_SESSION['tasks'][] = $task;
+    $this->tasks[] = $task;
+  }
+
   public function delTask(int $taskKey): void
   {
+    unset($_SESSION['tasks'][$taskKey]);
     unset($this->tasks[$taskKey]);
-    $_SESSION['tasks'] = $this->tasks;
-    strtok($_SERVER["REQUEST_URI"], '?');
-    header("Location: /?controller=tasks");
-    die();
   }
 
   public function doneTask(int $taskKey): void
   {
+    $_SESSION['tasks'][$taskKey]->markAsDone();
     $this->tasks[$taskKey]->markAsDone();
-    $_SESSION['tasks'] = $this->tasks;
-    strtok($_SERVER["REQUEST_URI"], '?');
-    header("Location: /?controller=tasks");
-    die();
   }
 
   public function continueTask(int $taskKey): void
   {
+    $_SESSION['tasks'][$taskKey]->markAsUndone();
     $this->tasks[$taskKey]->markAsUndone();
-    $_SESSION['tasks'] = $this->tasks;
-    strtok($_SERVER["REQUEST_URI"], '?');
-    header("Location: /?controller=tasks");
-    die();
   }
 
 }
