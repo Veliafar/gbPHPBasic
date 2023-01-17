@@ -3,7 +3,7 @@ require_once 'model/User.php';
 require_once 'model/UserProvider.php';
 
 session_start();
-
+$pdo = require "db.php";
 include_once "controller/SharedController.php";
 $pageHeader = 'Вход в систему';
 $pageTitle = $pageHeader . " | " . $commonPageTitle;
@@ -14,7 +14,7 @@ $error = null;
 if (isset($_POST['username'], $_POST['password'])) {
 
     ['username' => $userName, 'password' => $userPass] = $_POST;
-    $userProvider = new UserProvider();
+    $userProvider = new UserProvider($pdo);
     $user = $userProvider->getUserByNameAndPass($userName, $userPass);
 
     if ($user === null) {

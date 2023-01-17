@@ -60,14 +60,14 @@
                         <a
                                 title="Выполнить задачу"
                                 class="menu-button"
-                                href="/?controller=tasks&doneTask=<?= $key ?>">
+                                href="/?controller=tasks&changeTaskDone=<?= $key ?>&isDone=1">
                             ✔
                         </a>
                     <?php else: ?>
                         <a
                                 title="Продолжить задачу"
                                 class="menu-button menu-button--danger"
-                                href="/?controller=tasks&continueTask=<?= $key ?>">
+                                href="/?controller=tasks&changeTaskDone=<?= $key ?>&isDone=0">
                             &#8634;
                         </a>
                     <?php endif; ?>

@@ -10,17 +10,20 @@ session_start();
 //echo "</pre>";
 
 include_once "controller/SharedController.php";
+$pdo = require "db.php";
 $pageHeader = 'Задачи';
 $pageTitle = $pageHeader . " | " . $commonPageTitle;
 
 include_once "controller/LoginController.php";
 
 $tasks = [];
-$taskProvider = new TaskProvider();
+
+$userID = $_SESSION['username']->getID() ?? 0;
+$taskProvider = new TaskProvider($pdo, $userID);
 
 
 if (isset($_POST['description'])) {
-  $task = new Task($_POST['description']);
+  $task = new Task($_POST['description'], $userID);
   $taskProvider->addTask($task);
   strtok($_SERVER["REQUEST_URI"], '?');
   header("Location: /?controller=tasks");
@@ -34,15 +37,8 @@ if (isset($_GET['delTask'])) {
   die();
 }
 
-if (isset($_GET['doneTask'])) {
-  $taskProvider->doneTask($_GET['doneTask']);
-  strtok($_SERVER["REQUEST_URI"], '?');
-  header("Location: /?controller=tasks");
-  die();
-}
-
-if (isset($_GET['continueTask'])) {
-  $taskProvider->continueTask($_GET['continueTask']);
+if (isset($_GET['changeTaskDone'])) {
+  $taskProvider->changeTaskDone($_GET['changeTaskDone'], $_GET['isDone']);
   strtok($_SERVER["REQUEST_URI"], '?');
   header("Location: /?controller=tasks");
   die();
