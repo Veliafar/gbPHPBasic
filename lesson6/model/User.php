@@ -6,14 +6,21 @@ class User
   private string $userName;
   private string $name;
 
-  public function __construct(string $userName)
+  public function __construct(string $userName, int $id = 0, string $name = '')
   {
     $this->userName = $userName;
+    $this->id = $id;
+    $this->name = $name;
   }
 
   public function getID(): int
   {
     return $this->id;
+  }
+
+  public function setID($id): void
+  {
+    $this->id = $id;
   }
 
   public function getName(): string

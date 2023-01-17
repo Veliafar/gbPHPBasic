@@ -32,7 +32,7 @@ class UserProvider
       'username' => $userName,
       'password' => md5($password)
     ]);
-
-    return $statement->fetchObject(User::class, [$userName]) ?: null;
+    $userFromDB = $statement->fetchObject();
+    return new User($userFromDB->username, $userFromDB->id, $userFromDB->name,) ?: null;
   }
 }

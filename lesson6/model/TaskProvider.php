@@ -57,7 +57,7 @@ class TaskProvider
       'isDone' => (int)$task->getIsDone(),
       'dateCreate' => $task->getDateCreate(),
       'dateUpdate' => $task->getDateUpdate(),
-      'userID' => $task->getUserID(),
+      'userID' => $this->userID,
     ]);
 
     $this->tasks[] = new Task(

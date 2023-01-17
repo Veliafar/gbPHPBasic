@@ -12,7 +12,6 @@ $error = null;
 
 
 if (isset($_POST['username'], $_POST['password'])) {
-
     ['username' => $userName, 'password' => $userPass] = $_POST;
     $userProvider = new UserProvider($pdo);
     $user = $userProvider->getUserByNameAndPass($userName, $userPass);

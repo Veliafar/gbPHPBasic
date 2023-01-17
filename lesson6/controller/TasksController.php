@@ -18,9 +18,8 @@ include_once "controller/LoginController.php";
 
 $tasks = [];
 
-$userID = $_SESSION['username']->getID() ?? 0;
+$userID = $_SESSION['username']->getID();
 $taskProvider = new TaskProvider($pdo, $userID);
-
 
 if (isset($_POST['description'])) {
   $task = new Task($_POST['description'], $userID);
