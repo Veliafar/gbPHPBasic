@@ -22,8 +22,7 @@ $userID = $_SESSION['username']->getID();
 $taskProvider = new TaskProvider($pdo, $userID);
 
 if (isset($_POST['description'])) {
-  $task = new Task($_POST['description'], $userID);
-  $taskProvider->addTask($task);
+  $taskProvider->addTask($_POST['description'], $userID);
   strtok($_SERVER["REQUEST_URI"], '?');
   header("Location: /?controller=tasks");
   die();

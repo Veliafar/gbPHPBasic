@@ -11,23 +11,23 @@ class Task
 
   private bool $isDone;
 
-  private bool $userID;
+  private int $userID;
 
   public function __construct(
     string $description,
     int $userID,
+    int $id = 0,
     int | bool $isDone = false,
     string $dateCreate = '',
     string $dateUpdate = '',
-    int $id = 0,
   )
   {
-    $this->id = $id;
     $this->description = $description;
+    $this->userID = $userID;
+    $this->isDone = boolval($isDone);
     $this->dateCreate = !$dateCreate ? new DateTime() : $this->prepareStringDate($dateCreate);
     $this->dateUpdate = !$dateUpdate ? new DateTime() : $this->prepareStringDate($dateUpdate);
-    $this->isDone = boolval($isDone);
-    $this->userID = $userID;
+    $this->id = $id;
   }
 
   public function prepareStringDate(string $dateString): DateTime {

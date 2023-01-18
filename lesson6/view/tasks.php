@@ -42,6 +42,9 @@
                         дата создания
                     </label>
                     <?= $task->getDateCreate() ?>
+                    <div style="margin-left: 4px">
+                      <?= $task->getUserID() ?>
+                    </div>
                   </div>
                   <div class="tasks__item-cell tasks__item-cell--center">
                     <?= $task->description ?>

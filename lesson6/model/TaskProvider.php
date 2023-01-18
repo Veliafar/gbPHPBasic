@@ -23,14 +23,17 @@ class TaskProvider
 
     $tasksFromDB = $statement->fetchAll(PDO::FETCH_OBJ);
     foreach ($tasksFromDB as $taskDB) {
-      $this->tasks[] = new Task(
+
+      $taskFromBack = new Task(
         $taskDB->description,
         $taskDB->userID,
+        $taskDB->id,
         $taskDB->isDone,
         $taskDB->dateCreate,
         $taskDB->dateUpdate,
-        $taskDB->id
       );
+
+      $this->tasks[] = $taskFromBack;
     }
     if (!count($tasksFromDB)) {
       $this->tasks = [];
@@ -42,8 +45,14 @@ class TaskProvider
     return $this->tasks;
   }
 
-  public function addTask(Task $task): void
+  public function addTask(string $description, int $userID): void
   {
+    $newTask = new Task(
+      $description,
+      $userID,
+      $this->pdo->lastInsertId(),
+    );
+
     $statement = $this->pdo->prepare(
       'INSERT INTO tasks (
                     description, isDone, dateCreate, dateUpdate, userID
@@ -53,21 +62,14 @@ class TaskProvider
     );
 
     $statement->execute([
-      'description' => $task->description,
-      'isDone' => (int)$task->getIsDone(),
-      'dateCreate' => $task->getDateCreate(),
-      'dateUpdate' => $task->getDateUpdate(),
-      'userID' => $this->userID,
+      'description' => $newTask->description,
+      'isDone' => (int)$newTask->getIsDone(),
+      'dateCreate' => $newTask->getDateCreate(),
+      'dateUpdate' => $newTask->getDateUpdate(),
+      'userID' => $newTask->getUserID(),
     ]);
 
-    $this->tasks[] = new Task(
-      $task->description,
-      $task->getUserID(),
-      $task->getIsDone(),
-      $task->getDateCreate(),
-      $task->getDateUpdate(),
-      $this->pdo->lastInsertId()
-    );
+    $this->tasks[] = $newTask;
   }
 
   public function delTask(int $taskKey): void
@@ -94,17 +96,19 @@ class TaskProvider
   public function changeTaskDone(int $taskKey, int $isDone): void
   {
     $taskID = $this->tasks[$taskKey]->getID();
+    $userID = $this->tasks[$taskKey]->getUserID();
+
     $statement = $this->pdo->prepare(
       'UPDATE tasks SET isDone=:isDone WHERE id = :id AND userID = :userID'
     );
     $statement->execute([
       'isDone' => $isDone,
       'id' => $taskID,
-      'userID' => $this->userID
+      'userID' => $userID
     ]);
     $makeDoneKey = null;
     foreach($this->tasks as $key=>$value) {
-      if ($value->getUserID() === $this->userID && $value->getID() === $taskID) {
+      if ($value->getUserID() === $userID && $value->getID() === $taskID) {
         $makeDoneKey = $key;
       }
     }
