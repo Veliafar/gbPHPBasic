@@ -1,4 +1,5 @@
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
     <?php include __DIR__ . "/../styles.css";?>
 </style>
 
@@ -12,6 +13,14 @@
     <title><?= $pageTitle ?></title>
 </head>
 <body>
+
+<script>
+    const delTask = async (taskID) => {
+        const response = await fetch(`/?controller=tasks&delTask=${taskID}`);
+        const answer = await response.json();
+        document.getElementById(answer.id).remove();
+    }
+</script>
 
 <?php include "menu.php" ?>
 
@@ -31,20 +40,17 @@
     <div class="tasks">
 
       <?php foreach ($tasks as $key => $task): ?>
-          <div class="tasks__item">
+          <div class="tasks__item" id="<?= $task->getID() ?>">
               <div class="tasks__item-info tasks__item-info--status-wrapper">
 
                   <div class="tasks__item-status <?= $task->getIsDone() ? 'tasks__item-status--done' : 'tasks__item-status--undone' ?>">
                   </div>
 
                   <div class="tasks__item-cell tasks__item-cell--column">
-                    <label class="tasks__item-label">
-                        дата создания
-                    </label>
+                      <label class="tasks__item-label">
+                          дата создания
+                      </label>
                     <?= $task->getDateCreate() ?>
-                    <div style="margin-left: 4px">
-                      <?= $task->getUserID() ?>
-                    </div>
                   </div>
                   <div class="tasks__item-cell tasks__item-cell--center">
                     <?= $task->description ?>
@@ -77,7 +83,8 @@
                       <a
                               title="Удалить задачу"
                               class="menu-button menu-button--danger"
-                              href="/?controller=tasks&delTask=<?= $key ?>">
+                              onclick="delTask(<?= $task->getID() ?>)"
+                              >
                           &#10006;
                       </a>
                   </div>

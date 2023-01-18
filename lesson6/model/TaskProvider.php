@@ -72,9 +72,8 @@ class TaskProvider
     $this->tasks[] = $newTask;
   }
 
-  public function delTask(int $taskKey): void
+  public function delTask(int $taskID): int
   {
-    $taskID = $this->tasks[$taskKey]->getID();
 
     $statement = $this->pdo->prepare(
       'DELETE FROM tasks WHERE id = :id AND userID = :userID'
@@ -91,9 +90,11 @@ class TaskProvider
       }
     }
     unset($this->tasks[$deleteKey]);
+
+    return $taskID;
   }
 
-  public function changeTaskDone(int $taskKey, int $isDone): void
+  public function changeTaskDone(int $taskKey, int $isDone): int
   {
     $taskID = $this->tasks[$taskKey]->getID();
     $userID = $this->tasks[$taskKey]->getUserID();
@@ -113,6 +114,8 @@ class TaskProvider
       }
     }
     $this->tasks[$makeDoneKey]->changeTaskReady($isDone);
+
+    return $taskID;
   }
 
 }
