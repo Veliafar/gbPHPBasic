@@ -11,15 +11,18 @@ class UserProvider
 
   public function registerUser(User $user, string $plainPassword): bool
   {
+
+    $isUserExist = $this->pdo->prepare('SELECT id from users WHERE username = ?');
+    $isUserExist->execute([$user->getUserName()]);
+    if($isUserExist->fetch()) {
+      throw new Exception('Пользователь с таким именем уже есть');
+    }
+
     $statement = $this->pdo->prepare(
       'INSERT INTO users (name, username, password) VALUES (:name, :username, :password)'
     );
 
-    return $statement->execute([
-      'name' => $user->getName(),
-      'username' => $user->getUserName(),
-      'password' => md5($plainPassword)
-    ]);
+    return $this->pdo->lastInsertId();
   }
 
   public function getUserByNameAndPass(string $userName, string $password): ?User

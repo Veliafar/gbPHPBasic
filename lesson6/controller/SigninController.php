@@ -7,6 +7,7 @@ $pdo = require "db.php";
 include_once "controller/SharedController.php";
 $pageHeader = 'Регистрация';
 $pageTitle = $pageHeader . " | " . $commonPageTitle;
+$error = null;
 
 
 if (isset($_POST['username'], $_POST['password'], $_POST['name'])) {
@@ -14,12 +15,15 @@ if (isset($_POST['username'], $_POST['password'], $_POST['name'])) {
   $userProvider = new UserProvider($pdo);
   $user = new User($userName);
   $user->setName($name);
-  $userProvider->registerUser($user, $userPass);
-  $user->setID($pdo->lastInsertId());
 
-  $_SESSION['username'] = $user;
-  header("Location: index.php");
-  die();
+  try {
+    $user->setID($userProvider->registerUser($user, $userPass));
+    $_SESSION['user'] = $user;
+    header("Location: index.php");
+    die();
+  } catch (Exception $exception) {
+    $error = $exception->getMessage();
+  }
 }
 
 include "view/signin.php";

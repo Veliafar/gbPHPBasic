@@ -20,6 +20,10 @@
     <form method="post" class="auth-form">
         <h2 class="auth-form__header"><?=$pageHeader?></h2>
 
+        <div class="auth-form__error <?=$error ? 'auth-form__error--alert' : ''?>">
+          <?=$error?>
+        </div>
+
         <div class="auth-form__item">
             <label class="auth-form__label" for="name">имя</label>
             <input class="auth-form__input" type="text" id="name" name="name" required autofocus>

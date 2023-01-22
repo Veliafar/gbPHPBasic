@@ -7,9 +7,7 @@ $pdo = require "db.php";
 include_once "controller/SharedController.php";
 $pageHeader = 'Вход в систему';
 $pageTitle = $pageHeader . " | " . $commonPageTitle;
-
 $error = null;
-
 
 if (isset($_POST['username'], $_POST['password'])) {
     ['username' => $userName, 'password' => $userPass] = $_POST;
@@ -19,14 +17,14 @@ if (isset($_POST['username'], $_POST['password'])) {
     if ($user === null) {
         $error = 'Пользователь с указанными данными не существует';
     } else {
-        $_SESSION['username'] = $user;
+        $_SESSION['user'] = $user;
         header("Location: index.php");
         die();
     }
 }
 
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
-    unset($_SESSION['username']);
+    unset($_SESSION['user']);
     session_destroy();
     header('Location: /');
     die();
