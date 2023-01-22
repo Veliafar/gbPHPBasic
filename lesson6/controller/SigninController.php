@@ -5,6 +5,7 @@ require_once 'model/UserProvider.php';
 session_start();
 $pdo = require "db.php";
 include_once "controller/SharedController.php";
+include_once "exceptions/UserExistException.php";
 $pageHeader = 'Регистрация';
 $pageTitle = $pageHeader . " | " . $commonPageTitle;
 $error = null;
@@ -21,7 +22,7 @@ if (isset($_POST['username'], $_POST['password'], $_POST['name'])) {
     $_SESSION['user'] = $user;
     header("Location: index.php");
     die();
-  } catch (Exception $exception) {
+  } catch (UserExistException $exception) {
     $error = $exception->getMessage();
   }
 }

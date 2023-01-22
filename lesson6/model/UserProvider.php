@@ -1,5 +1,4 @@
 <?php
-
 class UserProvider
 {
   private PDO $pdo;
@@ -15,7 +14,7 @@ class UserProvider
     $isUserExist = $this->pdo->prepare('SELECT id from users WHERE username = ?');
     $isUserExist->execute([$user->getUserName()]);
     if($isUserExist->fetch()) {
-      throw new Exception('Пользователь с таким именем уже есть');
+      throw new UserExistException('Пользователь с таким именем уже есть');
     }
 
     $statement = $this->pdo->prepare(
