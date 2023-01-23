@@ -5,46 +5,47 @@ require_once "model/TaskProvider.php";
 session_start();
 
 //echo "<pre>";
-//print_r($_REQUEST);
-//print_r($_SESSION);
+//var_dump($_REQUEST);
+//var_dump($_SESSION);
 //echo "</pre>";
 
 include_once "controller/SharedController.php";
+$pdo = require "db.php";
 $pageHeader = 'Задачи';
 $pageTitle = $pageHeader . " | " . $commonPageTitle;
 
 include_once "controller/LoginController.php";
 
 $tasks = [];
-$taskProvider = new TaskProvider();
 
+$userID = $_SESSION['user']->getID();
+$taskProvider = new TaskProvider($pdo, $userID);
 
 if (isset($_POST['description'])) {
-  $task = new Task($_POST['description']);
-  $taskProvider->addTask($task);
+  $taskProvider->addTask($_POST['description'], $userID);
+  strtok($_SERVER["REQUEST_URI"], '?');
+  header("Location: /?controller=tasks");
+  die();
+}
+
+if (isset($_GET['changeTaskDone'])) {
+  $taskProvider->changeTaskDone($_GET['changeTaskDone'], $_GET['isDone']);
   strtok($_SERVER["REQUEST_URI"], '?');
   header("Location: /?controller=tasks");
   die();
 }
 
 if (isset($_GET['delTask'])) {
-  $taskProvider->delTask($_GET['delTask']);
-  strtok($_SERVER["REQUEST_URI"], '?');
-  header("Location: /?controller=tasks");
-  die();
-}
 
-if (isset($_GET['doneTask'])) {
-  $taskProvider->doneTask($_GET['doneTask']);
-  strtok($_SERVER["REQUEST_URI"], '?');
-  header("Location: /?controller=tasks");
-  die();
-}
+  $taskID = $taskProvider->delTask($_GET['delTask']);
 
-if (isset($_GET['continueTask'])) {
-  $taskProvider->continueTask($_GET['continueTask']);
-  strtok($_SERVER["REQUEST_URI"], '?');
-  header("Location: /?controller=tasks");
+  $response = [
+    'status' => 'ok',
+    'id' => $taskID
+  ];
+
+  header('Content-Type: application/json; charset=utf-8');
+  echo json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
   die();
 }
 

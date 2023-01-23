@@ -1,13 +1,19 @@
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
-</style>
+
 
 <?php
 $controller = $_GET['controller'] ?? 'index';
-
+$globalError = null;
 $routes = require 'router.php';
 
-include_once $routes[$controller] ?? die('404');
+try {
+  include_once $routes[$controller] ?? die('404');
+} catch (PDOException $exception) {
+  echo "Проблемы с БД";
+} catch (Throwable $exception) {
+  $globalError = $exception->getMessage();
+}
+
+
 
 
 

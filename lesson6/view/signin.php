@@ -21,12 +21,17 @@
         <h2 class="auth-form__header"><?=$pageHeader?></h2>
 
         <div class="auth-form__error <?=$error ? 'auth-form__error--alert' : ''?>">
-            <?=$error?>
+          <?=$error?>
+        </div>
+
+        <div class="auth-form__item">
+            <label class="auth-form__label" for="name">имя</label>
+            <input class="auth-form__input" type="text" id="name" name="name" required autofocus>
         </div>
 
         <div class="auth-form__item">
             <label class="auth-form__label" for="username">логин</label>
-            <input class="auth-form__input" type="text" id="username" name="username" required autofocus>
+            <input class="auth-form__input" type="text" id="username" name="username" required>
         </div>
 
         <div class="auth-form__item">
@@ -35,12 +40,8 @@
         </div>
 
         <div class="auth-form__control">
-            <a class="link-button" href="/?controller=signin"> Зарегистрироваться</a>
-        </div>
-
-        <div class="auth-form__control">
             <button class="menu-button" type="submit">
-                Войти
+                Регистрация
             </button>
 
             <a class="menu-button secondary-button" href="/"> Назад</a>
